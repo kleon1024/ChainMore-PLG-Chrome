@@ -4,32 +4,25 @@
   "version": null,
   "manifest_version": 2,
   "icons": {
-    "48": "icons/icon_48.png",
-    "128": "icons/icon_128.png"
+    "48": "icons/48.png",
+    "128": "icons/128.png"
   },
   "browser_action": {
     "default_icon": {
-       "19": "icons/19-action.png",
-       "38": "icons/38-action.png"
+      "19": "icons/19-action.png",
+      "38": "icons/38-action.png"
     },
-    "default_title": "掘金快捷分享"
- },
+    "default_title": "阡陌快捷分享"
+  },
   "background": {
-    "scripts": [
-      "background.js"
-    ]
+    "scripts": ["background.js"]
   },
   "options_ui": {
     "page": "options/options.html",
     "chrome_style": true,
     "open_in_tab": true
   },
-  "permissions": [
-    "activeTab",
-    "declarativeContent",
-    "storage",
-    "tabs"
-  ],
+  "permissions": ["activeTab", "declarativeContent", "storage", "tabs"],
   "commands": {
     "Run": {
       "suggested_key": {

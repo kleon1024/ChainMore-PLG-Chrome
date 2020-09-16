@@ -11,9 +11,7 @@ var browserActionIcon = {
 
 var invalidUrlRegs = [/^[^(http)]/, /(http|https):\/\/(127\.0\.0\.1|localhost)/, /(http|https):\/\/(.+\.)?xitu\.io/, /(http|https):\/\/(.+\.)?juejin\.im/];
 
-var checkUrlTemplate = 'https://juejin.im/check?url=:url';
-var shareUrlTemplate = 'https://juejin.im/new-entry?url=:url&title=:title';
-var entryUrlTemplate = 'https://juejin.im/entry/:entryId/detail';
+var shareUrlTemplate = 'https://www.chainmore.fun/op/create/resource?url=:url&title=:title';
 
 var states = {};
 var defaultState = {
@@ -44,7 +42,6 @@ chrome.tabs.onRemoved.addListener(function(tabId) {
 });
 
 chrome.browserAction.onClicked.addListener(function(tab) {
-  console.log('hhhhh');
   var state = states[tab.id] || defaultState;
   var shareUrl;
   var entryUrl;
@@ -52,10 +49,6 @@ chrome.browserAction.onClicked.addListener(function(tab) {
   if (state.shareable) {
     shareUrl = shareUrlTemplate.resolveQueryString('url', tab.url).resolveQueryString('title', tab.title);
     chrome.tabs.create({ url: shareUrl });
-  } else if (state.info.shared) {
-    entry = state.info.entry;
-    entryUrl = entryUrlTemplate.resolveQueryString('entryId', entry.objectId);
-    chrome.tabs.create({ url: entryUrl });
   }
 });
 
@@ -64,11 +57,11 @@ function updateBrowserAction(state) {
   if (state.shareable) {
     icon = browserActionIcon.shareable;
     badge = '';
-    title = '分享本页到掘金';
+    title = '分享本页到阡陌';
   } else {
     icon = browserActionIcon.normal;
     badge = '';
-    title = '掘金快捷分享（本页不可分享）';
+    title = '阡陌快捷分享（本页不可分享）';
   }
   chrome.browserAction.setIcon({ path: icon });
   chrome.browserAction.setBadgeText({ text: badge });
@@ -76,7 +69,6 @@ function updateBrowserAction(state) {
 }
 
 function getUrlInfo(url, onDone, onError) {
-  checkUrlTemplate.resolveQueryString('url', url);
   var state = copy(defaultState);
   console.log(isValidUrl(url));
   if (isValidUrl(url)) {
@@ -100,8 +92,8 @@ function copy(tar) {
   return res;
 }
 
-String.prototype.resolveQueryString = function (placeholder, value) {
-  var reg = new RegExp(':' + placeholder, 'g')
-  var encodedValue = encodeURIComponent(value)
-  return this.replace(reg, encodedValue)
-}
+String.prototype.resolveQueryString = function(placeholder, value) {
+  var reg = new RegExp(':' + placeholder, 'g');
+  var encodedValue = encodeURIComponent(value);
+  return this.replace(reg, encodedValue);
+};
