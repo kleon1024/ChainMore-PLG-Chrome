@@ -9,7 +9,7 @@ var browserActionIcon = {
   },
 };
 
-var invalidUrlRegs = [/^[^(http)]/, /(http|https):\/\/(127\.0\.0\.1|localhost)/, /(http|https):\/\/(.+\.)?xitu\.io/, /(http|https):\/\/(.+\.)?juejin\.im/];
+var invalidUrlRegs = [/^[^(http)]/, /(http|https):\/\/(127\.0\.0\.1|localhost)/, /(http|https):\/\/(.+\.)?chainmore\.fun/];
 
 var shareUrlTemplate = 'https://www.chainmore.fun/op/create/resource?url=:url&title=:title';
 
